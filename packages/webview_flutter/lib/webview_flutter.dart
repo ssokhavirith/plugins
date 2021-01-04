@@ -128,6 +128,7 @@ class WebView extends StatefulWidget {
   ///
   /// The `javascriptMode` parameter must not be null.
   /// The `domStorageMode` parameter must not be null.
+  ///   /// The `databaseMode` parameter must not be null.
   const WebView({
     Key key,
     this.onWebViewCreated,
@@ -380,6 +381,9 @@ WebSettings _clearUnchangedWebSettings(
   if (currentValue.domStorageMode != newValue.domStorageMode) {
     domStorageMode = newValue.domStorageMode;
   }
+  if (currentValue.databaseMode != newValue.databaseMode) {
+    databaseMode = newValue.databaseMode;
+  }
   if (currentValue.hasNavigationDelegate != newValue.hasNavigationDelegate) {
     hasNavigationDelegate = newValue.hasNavigationDelegate;
   }
@@ -390,6 +394,7 @@ WebSettings _clearUnchangedWebSettings(
   return WebSettings(
       javascriptMode: javascriptMode,
       domStorageMode: domStorageMode,
+      databaseMode: databaseMode,
       hasNavigationDelegate: hasNavigationDelegate,
       debuggingEnabled: debuggingEnabled);
 }
