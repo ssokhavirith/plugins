@@ -87,6 +87,24 @@ void main() {
     expect(platformWebView.domStorageMode, DOMStorageMode.disabled);
   });
 
+  testWidgets('Database mode', (WidgetTester tester) async {
+    await tester.pumpWidget(const WebView(
+      initialUrl: 'https://youtube.com',
+      databaseMode: DatabaseMode.enabled,
+    ));
+
+    final FakePlatformWebView platformWebView =
+        fakePlatformViewsController.lastCreatedView;
+
+    expect(platformWebView.databaseMode, DatabaseMode.enabled);
+
+    await tester.pumpWidget(const WebView(
+      initialUrl: 'https://youtube.com',
+      databaseMode: DatabaseMode.disabled,
+    ));
+    expect(platformWebView.databaseMode, DatabaseMode.disabled);
+  });
+
   testWidgets('Load url', (WidgetTester tester) async {
     WebViewController controller;
     await tester.pumpWidget(
@@ -843,6 +861,7 @@ class FakePlatformWebView {
     javascriptMode = JavascriptMode.values[params['settings']['jsMode']];
     domStorageMode =
         DOMStorageMode.values[params['settings']['domStorageMode']];
+    databaseMode = DatabaseMode.values[params['settings']['databaseMode']];
     hasNavigationDelegate =
         params['settings']['hasNavigationDelegate'] ?? false;
     debuggingEnabled = params['settings']['debuggingEnabled'];
@@ -862,6 +881,7 @@ class FakePlatformWebView {
   String get currentUrl => history.isEmpty ? null : history[currentPosition];
   JavascriptMode javascriptMode;
   DOMStorageMode domStorageMode;
+  DatabaseMode databaseMode;
   List<String> javascriptChannelNames;
 
   bool hasNavigationDelegate;
@@ -880,6 +900,9 @@ class FakePlatformWebView {
         if (call.arguments['domStorageMode'] != null) {
           domStorageMode =
               DOMStorageMode.values[call.arguments['domStorageMode']];
+        }
+        if (call.arguments['databaseMode'] != null) {
+          domStorageMode = DatabaseMode.values[call.arguments['databaseMode']];
         }
         if (call.arguments['hasNavigationDelegate'] != null) {
           hasNavigationDelegate = call.arguments['hasNavigationDelegate'];

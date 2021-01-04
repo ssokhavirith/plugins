@@ -121,6 +121,7 @@ class MethodChannelWebViewPlatform implements WebViewPlatformController {
 
     _addIfNonNull('jsMode', settings.javascriptMode?.index);
     _addIfNonNull('domStorageMode', settings.domStorageMode?.index);
+    _addIfNonNull('databaseMode', settings.databaseMode?.index);
     _addIfNonNull('hasNavigationDelegate', settings.hasNavigationDelegate);
     _addIfNonNull('debuggingEnabled', settings.debuggingEnabled);
     return map;

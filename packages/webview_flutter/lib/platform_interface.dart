@@ -164,6 +164,7 @@ class WebSettings {
     this.hasNavigationDelegate,
     this.debuggingEnabled,
     this.domStorageMode,
+    this.databaseMode,
   });
 
   /// The JavaScript execution mode to be used by the webview.
@@ -171,6 +172,10 @@ class WebSettings {
 
   /// The DOM Stroage mode to be used by Android webview.
   final DOMStorageMode domStorageMode;
+
+  //Database mode
+
+  final DatabaseMode databaseMode;
 
   /// Whether the [WebView] has a [NavigationDelegate] set.
   final bool hasNavigationDelegate;

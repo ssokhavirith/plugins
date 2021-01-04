@@ -22,6 +22,14 @@ enum JavascriptMode {
   unrestricted,
 }
 
+enum DatabaseMode {
+  /// Database execution is disabled.
+  disabled,
+
+  /// Database execution is not restricted.
+  enabled,
+}
+
 enum DOMStorageMode {
   /// DOM Storage is disabled.
   disabled,
@@ -125,7 +133,8 @@ class WebView extends StatefulWidget {
     this.onWebViewCreated,
     this.initialUrl,
     this.javascriptMode = JavascriptMode.disabled,
-    this.domStorageMode = DOMStorageMode.disabled,
+    this.domStorageMode = DOMStorageMode.enabled,
+    this.databaseMode = DatabaseMode.enabled,
     this.javascriptChannels,
     this.navigationDelegate,
     this.gestureRecognizers,
@@ -133,6 +142,7 @@ class WebView extends StatefulWidget {
     this.debuggingEnabled = false,
   })  : assert(javascriptMode != null),
         assert(domStorageMode != null),
+        assert(databaseMode != null),
         super(key: key);
 
   static WebViewPlatform _platform;
@@ -190,6 +200,8 @@ class WebView extends StatefulWidget {
 
   /// Whether DOM Storage is enabled;
   final DOMStorageMode domStorageMode;
+
+  final DatabaseMode databaseMode;
 
   /// The set of [JavascriptChannel]s available to JavaScript code running in the web view.
   ///
@@ -338,6 +350,7 @@ WebSettings _webSettingsFromWidget(WebView widget) {
   return WebSettings(
     javascriptMode: widget.javascriptMode,
     domStorageMode: widget.domStorageMode,
+    databaseMode: widget.databaseMode,
     hasNavigationDelegate: widget.navigationDelegate != null,
     debuggingEnabled: widget.debuggingEnabled,
   );
@@ -348,14 +361,17 @@ WebSettings _clearUnchangedWebSettings(
     WebSettings currentValue, WebSettings newValue) {
   assert(currentValue.javascriptMode != null);
   assert(currentValue.domStorageMode != null);
+  assert(currentValue.databaseMode != null);
   assert(currentValue.hasNavigationDelegate != null);
   assert(currentValue.debuggingEnabled != null);
   assert(newValue.javascriptMode != null);
   assert(newValue.domStorageMode != null);
+  assert(newValue.databaseMode != null);
   assert(newValue.hasNavigationDelegate != null);
   assert(newValue.debuggingEnabled != null);
   JavascriptMode javascriptMode;
   DOMStorageMode domStorageMode;
+  DatabaseMode databaseMode;
   bool hasNavigationDelegate;
   bool debuggingEnabled;
   if (currentValue.javascriptMode != newValue.javascriptMode) {
