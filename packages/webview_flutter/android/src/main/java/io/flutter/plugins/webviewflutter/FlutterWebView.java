@@ -196,7 +196,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
       case "domStorageMode":
         updateDomStorageMode((Integer) settings.get(key));
         break;
-      case "databaseStorageMode":
+      case "databaseMode":
         updateDatabaseMode((Integer) settings.get(key));
         break;
       case "hasNavigationDelegate":

@@ -128,7 +128,7 @@ class WebView extends StatefulWidget {
   ///
   /// The `javascriptMode` parameter must not be null.
   /// The `domStorageMode` parameter must not be null.
-  ///   /// The `databaseMode` parameter must not be null.
+  /// The `databaseMode` parameter must not be null.
   const WebView({
     Key key,
     this.onWebViewCreated,

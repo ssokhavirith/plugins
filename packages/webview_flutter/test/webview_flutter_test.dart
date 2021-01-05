@@ -82,9 +82,9 @@ void main() {
 
     await tester.pumpWidget(const WebView(
       initialUrl: 'https://youtube.com',
-      domStorageMode: DOMStorageMode.disabled,
+      domStorageMode: DOMStorageMode.enabled,
     ));
-    expect(platformWebView.domStorageMode, DOMStorageMode.disabled);
+    expect(platformWebView.domStorageMode, DOMStorageMode.enabled);
   });
 
   testWidgets('Database mode', (WidgetTester tester) async {
@@ -100,9 +100,9 @@ void main() {
 
     await tester.pumpWidget(const WebView(
       initialUrl: 'https://youtube.com',
-      databaseMode: DatabaseMode.disabled,
+      databaseMode: DatabaseMode.enabled,
     ));
-    expect(platformWebView.databaseMode, DatabaseMode.disabled);
+    expect(platformWebView.databaseMode, DatabaseMode.enabled);
   });
 
   testWidgets('Load url', (WidgetTester tester) async {
